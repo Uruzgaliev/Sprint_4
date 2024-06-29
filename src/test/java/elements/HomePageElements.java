@@ -1,4 +1,4 @@
-package Elements;
+package elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,10 +23,10 @@ public class  HomePageElements {
     private String dropDownText = ".//div[@id='accordion__panel-%d']";
 
     // Локатор для кнопки "Cookie" на домашней странице
-    private static final By cookieButtonHomePage = By.xpath(".//button[@id='rcc-confirm-button']");
+    private static final By COOKIE_BUTTON_HOME_PAGE = By.xpath(".//button[@id='rcc-confirm-button']");
 
     // Локатор для прокрутки до первого элемента "Вопросы о важном"
-    private static final By firstDropDownItem = By.xpath(".//div[@id='accordion__heading-0']");
+    private static final By FIRST_DROP_DOWN_ITEM = By.xpath(".//div[@id='accordion__heading-0']");
 
     // Метод для всех вопросов "Вопросы о важном"
     public void clickOneDropDownItems(int itemIndex) {
@@ -43,13 +43,14 @@ public class  HomePageElements {
     }
 
     // Метод для доступа к кнопке "Куки"
-    public static By getCookieButtonHomePage() {
-        return cookieButtonHomePage;
+    public void clickCookieButtonHomePage() {
+        driver.findElement(COOKIE_BUTTON_HOME_PAGE);
     }
 
     // Метод для доступа к первому вопросу "Вопросы о важном"
-    public static By getFirstDropDownItem() {
-        return firstDropDownItem;
+    public WebElement scrollFirstDropDownItem() {
+        return driver.findElement(FIRST_DROP_DOWN_ITEM);
+
     }
 
 }

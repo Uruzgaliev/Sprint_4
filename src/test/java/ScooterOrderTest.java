@@ -1,4 +1,4 @@
-import Elements.OrderPageElements;
+import elements.OrderPageElements;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
@@ -49,49 +49,52 @@ public class ScooterOrderTest {
     // Тест верхней кнопки "Заказать"
     @Test
     public void testScooterOrderButtonTop() {
-        driver.findElement(OrderPageElements.getOrderButtonTop()).click();
-        driver.findElement(OrderPageElements.getNameField()).sendKeys(firstName);
-        driver.findElement(OrderPageElements.getSurnameField()).sendKeys(lastName);
-        driver.findElement(OrderPageElements.getOrderAddressField()).sendKeys(address);
-        driver.findElement(OrderPageElements.getMetroStationField()).click();
-        driver.findElement(OrderPageElements.getSelectedStation()).click();
-        driver.findElement(OrderPageElements.getPhoneNumberField()).sendKeys(phoneNumber);
-        driver.findElement(OrderPageElements.getCookieButton()).click();
-        driver.findElement(OrderPageElements.getNextButton()).click();
-        driver.findElement(OrderPageElements.getDeliveryDateField()).click();
-        driver.findElement(OrderPageElements.getDeliveryDate()).click();
-        driver.findElement(OrderPageElements.getRentalPeriodField()).click();
-        driver.findElement(OrderPageElements.getDropdownPeriodList()).click();
-        driver.findElement(OrderPageElements.getColorBlackField()).click();
-        driver.findElement(OrderPageElements.getCommentField()).sendKeys(comment);
-        driver.findElement(OrderPageElements.getButtonOrderAboutRent()).click();
-        driver.findElement(OrderPageElements.getButtonConfirmOrder()).click();
-        assertTrue(driver.findElement(OrderPageElements.getOrderTitle()).getText().contains("Заказ оформлен"));
+        OrderPageElements orderPageElements = new OrderPageElements(driver);
+        orderPageElements.clickOrderButtonTop();
+        orderPageElements.enterFirstName(firstName);
+        orderPageElements.enterLastName(lastName);
+        orderPageElements.enterOrderAddressField(address);
+        orderPageElements.clickMetroStationField();
+        orderPageElements.selectedStation();
+        orderPageElements.enterPhoneNumberField(phoneNumber);
+        orderPageElements.clickCookieButton();
+        orderPageElements.clickNextButton();
+        orderPageElements.clickDeliveryDateField();
+        orderPageElements.clickDeliveryDate();
+        orderPageElements.clickRentalPeriodField();
+        orderPageElements.clickDropdownPeriodList();
+        orderPageElements.clickColorBlackField();
+        orderPageElements.enterCommentField(comment);
+        orderPageElements.clickButtonOrderAboutRent();
+        orderPageElements.clickButtonConfirmOrder();
+        assertTrue(orderPageElements.textOrderTitle().contains("Заказ оформлен"));
     }
 
     // Тест кнопки "Заказать" в середине страницы
     @Test
     public void testScooterOrderButtonMiddle() {
-        WebElement element = driver.findElement(OrderPageElements.getOrderButtonMiddle());
+        OrderPageElements orderPageElements = new OrderPageElements(driver);
+        orderPageElements.clickCookieButtonHomePage();
+        WebElement element = orderPageElements.clickOrderButtonMiddle();
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
         element.click();
-        driver.findElement(OrderPageElements.getNameField()).sendKeys(firstName);
-        driver.findElement(OrderPageElements.getSurnameField()).sendKeys(lastName);
-        driver.findElement(OrderPageElements.getOrderAddressField()).sendKeys(address);
-        driver.findElement(OrderPageElements.getMetroStationField()).click();
-        driver.findElement(OrderPageElements.getSelectedStation()).click();
-        driver.findElement(OrderPageElements.getPhoneNumberField()).sendKeys(phoneNumber);
-        driver.findElement(OrderPageElements.getCookieButton()).click();
-        driver.findElement(OrderPageElements.getNextButton()).click();
-        driver.findElement(OrderPageElements.getDeliveryDateField()).click();
-        driver.findElement(OrderPageElements.getDeliveryDate()).click();
-        driver.findElement(OrderPageElements.getRentalPeriodField()).click();
-        driver.findElement(OrderPageElements.getDropdownPeriodList()).click();
-        driver.findElement(OrderPageElements.getColorGreyField()).click();
-        driver.findElement(OrderPageElements.getCommentField()).sendKeys(comment);
-        driver.findElement(OrderPageElements.getButtonOrderAboutRent()).click();
-        driver.findElement(OrderPageElements.getButtonConfirmOrder()).click();
-        assertTrue(driver.findElement(OrderPageElements.getOrderTitle()).getText().contains("Заказ оформлен"));
+        orderPageElements.enterFirstName(firstName);
+        orderPageElements.enterLastName(lastName);
+        orderPageElements.enterOrderAddressField(address);
+        orderPageElements.clickMetroStationField();
+        orderPageElements.selectedStation();
+        orderPageElements.enterPhoneNumberField(phoneNumber);
+        orderPageElements.clickNextButton();
+        orderPageElements.clickDeliveryDateField();
+        orderPageElements.clickDeliveryDate();
+        orderPageElements.clickRentalPeriodField();
+        orderPageElements.clickDropdownPeriodList();
+        orderPageElements.clickColorBlackField();
+        orderPageElements.enterCommentField(comment);
+        orderPageElements.clickButtonOrderAboutRent();
+        orderPageElements.clickButtonConfirmOrder();
+        assertTrue(orderPageElements.textOrderTitle().contains("Заказ оформлен"));
+
     }
 
     @After

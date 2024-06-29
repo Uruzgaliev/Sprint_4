@@ -1,4 +1,4 @@
-import Elements.HomePageElements;
+import elements.HomePageElements;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -41,14 +41,14 @@ public class HomePageTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get("https://qa-scooter.praktikum-services.ru");
-        WebElement element = driver.findElement(HomePageElements.getFirstDropDownItem());
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(HomePageElements.getCookieButtonHomePage()).click();
     }
 
     @Test
     public void testItemText() {
         HomePageElements homePageElements = new HomePageElements(driver);
+        WebElement element = homePageElements.scrollFirstDropDownItem();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        homePageElements.clickCookieButtonHomePage();
         homePageElements.clickOneDropDownItems(itemIndex);
         String actualText = homePageElements.getCorrectTextFromDropItems(itemIndex);
         Assert.assertEquals("Выпадающий текст не соответствует ", expectedText, actualText);
